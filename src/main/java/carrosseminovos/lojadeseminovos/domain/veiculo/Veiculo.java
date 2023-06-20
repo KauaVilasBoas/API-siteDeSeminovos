@@ -52,7 +52,7 @@ public class Veiculo {
         List<Foto> fotos = new ArrayList<>();
         if (dados.urlFotos() != null) {
             for (DadosFoto dadosFoto : dados.urlFotos()) {
-                fotos.add(new Foto(dadosFoto));
+                fotos.add(new Foto(dadosFoto, this));
             }
         }
         this.urlFotos = fotos;

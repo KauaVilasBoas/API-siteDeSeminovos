@@ -6,9 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Embeddable
+@Entity(name = "foto")
+@Table(name = "fotos")
 @Getter
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class Foto {
@@ -20,8 +20,9 @@ public class Foto {
     @ManyToOne
     private Veiculo veiculo;
 
-    public Foto(DadosFoto dados){
+    public Foto(DadosFoto dados, Veiculo veiculo){
         this.url = dados.url();
+        this.veiculo = veiculo;
     }
 
 }
