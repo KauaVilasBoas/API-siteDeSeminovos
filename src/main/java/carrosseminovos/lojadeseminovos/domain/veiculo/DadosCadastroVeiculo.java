@@ -1,5 +1,8 @@
 package carrosseminovos.lojadeseminovos.domain.veiculo;
 
+import carrosseminovos.lojadeseminovos.domain.veiculo.foto.DadosFoto;
+import carrosseminovos.lojadeseminovos.domain.veiculo.foto.Foto;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -16,7 +19,7 @@ public record DadosCadastroVeiculo(
         String versao,
         @NotBlank
         String cambio,
-        String qtdePortas,
+        Integer qtdePortas,
         @NotBlank
         String combustivel,
         @NotNull
@@ -28,6 +31,7 @@ public record DadosCadastroVeiculo(
         @NotBlank
         String descricao,
         @NotNull
-        List<String> urlFotos
+        @Valid
+        List<DadosFoto> urlFotos
 ) {
 }

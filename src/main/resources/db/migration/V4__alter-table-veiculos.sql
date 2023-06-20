@@ -1,0 +1,2 @@
+ALTER TABLE veiculos
+    ALTER COLUMN url DROP NOT NULL;

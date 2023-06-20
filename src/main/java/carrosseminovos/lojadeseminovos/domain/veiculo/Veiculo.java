@@ -1,12 +1,14 @@
 package carrosseminovos.lojadeseminovos.domain.veiculo;
 
-import carrosseminovos.lojadeseminovos.domain.veiculo.foto.Fotos;
+import carrosseminovos.lojadeseminovos.domain.veiculo.foto.DadosFoto;
+import carrosseminovos.lojadeseminovos.domain.veiculo.foto.Foto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "veiculo")
@@ -24,14 +26,15 @@ public class Veiculo {
     private String anoFabEMod;
     private String versao;
     private String cambio;
-    private String qtdePortas;
+    private Integer qtdePortas;
     private String combustivel;
     private Integer km;
     private String placa;
     private Double preco;
     private String descricao;
+
     @OneToMany(mappedBy = "veiculo", cascade = CascadeType.REMOVE)
-    private List<Fotos> urlFotos;
+    private List<Foto> urlFotos;
 
     public Veiculo(DadosCadastroVeiculo dados){
         this.marca = dados.marca();
@@ -45,7 +48,14 @@ public class Veiculo {
         this.placa = dados.placa();
         this.preco = dados.preco();
         this.descricao = dados.descricao();
-        this.urlFotos = dados.urlFotos();
+
+        List<Foto> fotos = new ArrayList<>();
+        if (dados.urlFotos() != null) {
+            for (DadosFoto dadosFoto : dados.urlFotos()) {
+                fotos.add(new Foto(dadosFoto));
+            }
+        }
+        this.urlFotos = fotos;
     }
 
 }

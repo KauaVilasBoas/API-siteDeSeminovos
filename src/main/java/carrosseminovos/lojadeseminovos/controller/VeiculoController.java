@@ -26,7 +26,7 @@ public class VeiculoController {
 
         var veiculo = new Veiculo(dados);
         veiculoRepository.save(veiculo);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new DadosDetalhamentoVeiculo(dados.marca(), dados.modelo(), dados.anoFabEMod(), dados.versao(), dados.cambio(), dados.qtdePortas(), dados.combustivel(), dados.km(), dados.placa(), dados.preco(), dados.descricao(), dados.urlFotos()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new DadosDetalhamentoVeiculo(veiculo));
     }
 
 }
