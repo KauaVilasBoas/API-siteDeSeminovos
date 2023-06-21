@@ -1,6 +1,7 @@
 package carrosseminovos.lojadeseminovos.service;
 
 import carrosseminovos.lojadeseminovos.domain.veiculo.*;
+import carrosseminovos.lojadeseminovos.domain.veiculo.filtros.DadosFiltrarPorCambio;
 import carrosseminovos.lojadeseminovos.domain.veiculo.foto.DadosListagemFoto;
 import carrosseminovos.lojadeseminovos.domain.veiculo.foto.Foto;
 import carrosseminovos.lojadeseminovos.domain.veiculo.foto.FotoRepository;
@@ -22,6 +23,8 @@ public class VeiculoService {
 
     @Autowired
     private FotoRepository fotoRepository;
+
+    //C.R.U.D
 
     public DadosDetalhamentoVeiculo cadastrarVeiculo(DadosCadastroVeiculo dados) {
 
@@ -54,12 +57,24 @@ public class VeiculoService {
 
     public DadosDetalhamentoVeiculo detalharVeiculo(Long id){
         var veiculo = veiculoRepository.getReferenceById(id);
+        var fotos = fotoRepository.findAllByVeiculoId(id);
         return new DadosDetalhamentoVeiculo(veiculo);
     }
+
+    //FOTO
 
     public Stream<DadosListagemFoto> fotosDoVeiculo(Long id){
         var fotos = fotoRepository.findAllByVeiculoId(id).stream().map(DadosListagemFoto::new);
         return fotos;
+    }
+
+    //FILTROS
+
+    public Stream<DadosListagemVeiculo> filtrarVeiculoPorCambio(DadosFiltrarPorCambio dados){
+
+        var listaVeiculos = veiculoRepository.findAllByCambioEquals(dados.cambio()).stream().map(DadosListagemVeiculo::new);
+        return listaVeiculos;
+
     }
 
 }

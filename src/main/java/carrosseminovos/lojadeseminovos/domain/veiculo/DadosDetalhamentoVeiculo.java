@@ -1,8 +1,11 @@
 package carrosseminovos.lojadeseminovos.domain.veiculo;
 
 import carrosseminovos.lojadeseminovos.domain.veiculo.foto.DadosFoto;
+import carrosseminovos.lojadeseminovos.domain.veiculo.foto.DadosListagemFoto;
 import carrosseminovos.lojadeseminovos.domain.veiculo.foto.Foto;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public record DadosDetalhamentoVeiculo(Long id, String marca, String modelo, String anoFabEMod, String versao, String cambio, Integer qtdePortas, String combustivel, Integer km, String placa, Double preco, String descricao) {

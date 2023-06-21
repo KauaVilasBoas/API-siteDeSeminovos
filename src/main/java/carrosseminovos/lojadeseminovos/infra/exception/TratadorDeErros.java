@@ -10,7 +10,7 @@ public class TratadorDeErros {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity tratarErroDeEntidadeNaoEncontrada(){
-        return ResponseEntity.badRequest().body("ID inválido");
+        return ResponseEntity.badRequest().body("Entidade não encontrada");
     }
 
 }

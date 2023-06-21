@@ -1,6 +1,7 @@
 package carrosseminovos.lojadeseminovos.controller;
 
 import carrosseminovos.lojadeseminovos.domain.veiculo.*;
+import carrosseminovos.lojadeseminovos.domain.veiculo.filtros.DadosFiltrarPorCambio;
 import carrosseminovos.lojadeseminovos.domain.veiculo.foto.Foto;
 import carrosseminovos.lojadeseminovos.domain.veiculo.foto.FotoRepository;
 import carrosseminovos.lojadeseminovos.service.VeiculoService;
@@ -24,6 +25,8 @@ public class VeiculoController {
 
     @Autowired
     private VeiculoService veiculoService;
+
+    //C.R.U.D
 
     @PostMapping("/cadastrarVeiculo")
     @Transactional
@@ -51,6 +54,16 @@ public class VeiculoController {
 
     }
 
+    @DeleteMapping("excluirVeiculo/{id}")
+    public ResponseEntity excluirVeiculo(@PathVariable Long id) {
+
+        veiculoService.excluirVeiculo(id);
+        return ResponseEntity.noContent().build();
+
+    }
+
+    //FOTO
+
     @GetMapping("fotos/{id}")
     public ResponseEntity fotosDoVeiculo(@PathVariable Long id){
         var fotos = veiculoService.fotosDoVeiculo(id);
@@ -58,11 +71,13 @@ public class VeiculoController {
     }
 
 
-    @DeleteMapping("excluirVeiculo/{id}")
-    public ResponseEntity excluirVeiculo(@PathVariable Long id) {
+    //FILTROS
 
-        veiculoService.excluirVeiculo(id);
-        return ResponseEntity.noContent().build();
+    @GetMapping("/filtrarPorCambio")
+    public ResponseEntity filtraVeiculoPorCambio(@RequestBody @Valid DadosFiltrarPorCambio cambio){
+
+        var listaDeVeiculos = veiculoService.filtrarVeiculoPorCambio(cambio);
+        return ResponseEntity.status(HttpStatus.OK).body(listaDeVeiculos);
 
     }
 

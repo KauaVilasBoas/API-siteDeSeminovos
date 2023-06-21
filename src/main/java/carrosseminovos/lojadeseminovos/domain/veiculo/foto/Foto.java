@@ -1,6 +1,8 @@
 package carrosseminovos.lojadeseminovos.domain.veiculo.foto;
 
 import carrosseminovos.lojadeseminovos.domain.veiculo.Veiculo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
