@@ -37,7 +37,7 @@ public class VeiculoService {
         return new DadosDetalhamentoVeiculo(veiculo);
     }
 
-    public Page<DadosListagemVeiculo> listagemVeiculos(Pageable pageable){
+    public Page<DadosListagemVeiculo> listagemVeiculos(Pageable pageable) {
 
         var page = veiculoRepository.findAll(pageable).map(DadosListagemVeiculo::new);
         return page;
@@ -49,13 +49,13 @@ public class VeiculoService {
         var veiculo = veiculoRepository.getReferenceById(idVeiculo);
         veiculoRepository.delete(veiculo);
 
-        if (veiculo.equals(null)){
+        if (veiculo.equals(null)) {
             throw new RuntimeException();
         }
 
     }
 
-    public DadosDetalhamentoVeiculo detalharVeiculo(Long id){
+    public DadosDetalhamentoVeiculo detalharVeiculo(Long id) {
         var veiculo = veiculoRepository.getReferenceById(id);
         var fotos = fotoRepository.findAllByVeiculoId(id);
         return new DadosDetalhamentoVeiculo(veiculo);
@@ -63,17 +63,24 @@ public class VeiculoService {
 
     //FOTO
 
-    public Stream<DadosListagemFoto> fotosDoVeiculo(Long id){
+    public Stream<DadosListagemFoto> fotosDoVeiculo(Long id) {
         var fotos = fotoRepository.findAllByVeiculoId(id).stream().map(DadosListagemFoto::new);
         return fotos;
     }
 
     //FILTROS
 
-    public Stream<DadosListagemVeiculo> filtrarVeiculoPorCambio(DadosFiltrarPorCambio dados){
+    public Stream<DadosListagemVeiculo> filtrarVeiculoPorCambio(DadosFiltrarPorCambio dados) {
 
         var listaVeiculos = veiculoRepository.findAllByCambioEquals(dados.cambio()).stream().map(DadosListagemVeiculo::new);
         return listaVeiculos;
+
+    }
+
+    public Page<DadosListagemVeiculo> filtrarVeiculo(Pageable pageable) {
+
+        var page = veiculoRepository.findAll(pageable).map(DadosListagemVeiculo::new);
+        return page;
 
     }
 

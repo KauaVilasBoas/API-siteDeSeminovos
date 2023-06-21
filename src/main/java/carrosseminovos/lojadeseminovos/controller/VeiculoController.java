@@ -1,9 +1,8 @@
 package carrosseminovos.lojadeseminovos.controller;
 
-import carrosseminovos.lojadeseminovos.domain.veiculo.*;
+import carrosseminovos.lojadeseminovos.domain.veiculo.DadosCadastroVeiculo;
+import carrosseminovos.lojadeseminovos.domain.veiculo.DadosListagemVeiculo;
 import carrosseminovos.lojadeseminovos.domain.veiculo.filtros.DadosFiltrarPorCambio;
-import carrosseminovos.lojadeseminovos.domain.veiculo.foto.Foto;
-import carrosseminovos.lojadeseminovos.domain.veiculo.foto.FotoRepository;
 import carrosseminovos.lojadeseminovos.service.VeiculoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping()
@@ -74,10 +69,26 @@ public class VeiculoController {
     //FILTROS
 
     @GetMapping("/filtrarPorCambio")
-    public ResponseEntity filtraVeiculoPorCambio(@RequestBody @Valid DadosFiltrarPorCambio cambio){
+    public ResponseEntity filtraVeiculoPorCambio(@RequestBody @Valid DadosFiltrarPorCambio dados){
 
-        var listaDeVeiculos = veiculoService.filtrarVeiculoPorCambio(cambio);
+        var listaDeVeiculos = veiculoService.filtrarVeiculoPorCambio(dados);
         return ResponseEntity.status(HttpStatus.OK).body(listaDeVeiculos);
+
+    }
+
+    @GetMapping("/filtraPorKm")
+    public ResponseEntity<Page<DadosListagemVeiculo>> filtraVeiculoPorKmCrescente(@PageableDefault(size = 20, sort = {"km"}) Pageable pageable){
+
+        var page = veiculoService.filtrarVeiculo(pageable);
+        return ResponseEntity.status(HttpStatus.OK).body(page);
+
+    }
+
+    @GetMapping("/filtraPorAno")
+    public ResponseEntity<Page<DadosListagemVeiculo>> filtraVeiculoPorAnoCrescente(@PageableDefault(size = 20, sort = {"anoFabEMod"}) Pageable pageable){
+
+        var page = veiculoService.filtrarVeiculo(pageable);
+        return ResponseEntity.status(HttpStatus.OK).body(page);
 
     }
 
