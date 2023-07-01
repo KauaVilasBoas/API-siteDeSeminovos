@@ -3,10 +3,7 @@ package carrosseminovos.lojadeseminovos.domain.veiculo;
 import carrosseminovos.lojadeseminovos.domain.veiculo.foto.DadosFoto;
 import carrosseminovos.lojadeseminovos.domain.veiculo.foto.Foto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +11,7 @@ import java.util.List;
 @Entity(name = "veiculo")
 @Table(name = "veiculos")
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")

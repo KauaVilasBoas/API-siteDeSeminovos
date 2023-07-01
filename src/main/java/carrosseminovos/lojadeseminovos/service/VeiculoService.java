@@ -84,4 +84,33 @@ public class VeiculoService {
 
     }
 
+    public Veiculo atualizarVeiculo(DadosAtualizacaoVeiculo dados) {
+
+        var veiculo = veiculoRepository.getReferenceById(dados.id());
+
+        if (dados.marca() != null) veiculo.setMarca(dados.marca());
+
+        if (dados.modelo() != null) veiculo.setModelo(dados.modelo());
+
+        if (dados.anoFabEMod() != null) veiculo.setAnoFabEMod(dados.anoFabEMod());
+
+        if (dados.versao() != null) veiculo.setVersao(dados.versao());
+
+        if (dados.cambio() != null) veiculo.setCambio(dados.cambio());
+
+        if (dados.qtdePortas() != null) veiculo.setQtdePortas(dados.qtdePortas());
+
+        if (dados.combustivel() != null) veiculo.setCombustivel(dados.combustivel());
+
+        if (dados.km() != null) veiculo.setKm(dados.km());
+
+        if (dados.placa() != null) veiculo.setPlaca(dados.placa());
+
+        if (dados.preco() != null) veiculo.setPreco(dados.preco());
+
+        if (dados.descricao() != null) veiculo.setDescricao(dados.descricao());
+
+        return veiculo;
+
+    }
 }

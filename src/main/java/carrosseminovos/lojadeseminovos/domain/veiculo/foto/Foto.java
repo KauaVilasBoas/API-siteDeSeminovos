@@ -7,10 +7,12 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity(name = "foto")
 @Table(name = "fotos")
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Foto {
@@ -18,7 +20,6 @@ public class Foto {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String url;
-
     @ManyToOne
     private Veiculo veiculo;
 

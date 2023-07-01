@@ -1,6 +1,8 @@
 package carrosseminovos.lojadeseminovos.controller;
 
+import carrosseminovos.lojadeseminovos.domain.veiculo.DadosAtualizacaoVeiculo;
 import carrosseminovos.lojadeseminovos.domain.veiculo.DadosCadastroVeiculo;
+import carrosseminovos.lojadeseminovos.domain.veiculo.DadosDetalhamentoVeiculo;
 import carrosseminovos.lojadeseminovos.domain.veiculo.DadosListagemVeiculo;
 import carrosseminovos.lojadeseminovos.domain.veiculo.filtros.DadosFiltrarPorCambio;
 import carrosseminovos.lojadeseminovos.service.VeiculoService;
@@ -89,6 +91,14 @@ public class VeiculoController {
 
         var page = veiculoService.filtrarVeiculo(pageable);
         return ResponseEntity.status(HttpStatus.OK).body(page);
+
+    }
+
+    @PutMapping("/atualizar")
+    public ResponseEntity atualizarVeiculo(@RequestBody @Valid DadosAtualizacaoVeiculo dados){
+
+        var veiculo = veiculoService.atualizarVeiculo(dados);
+        return ResponseEntity.ok(new DadosDetalhamentoVeiculo(veiculo));
 
     }
 
